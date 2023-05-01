@@ -109,7 +109,7 @@ movie_number = df_selection["title"].count()
 if selected == "Overview":
     left_column,right_column = st.columns(2)
     with left_column:
-        st.subheader("Avg IMBd Rating")
+        st.subheader("Avg IMDb Rating")
         st.subheader(f"{avg_imbd_rating} {avg_imbd_rating_star}")
     with right_column:
         st.subheader("Number of movies")
@@ -122,7 +122,7 @@ st.markdown("---")
 movies_by_year = pd.DataFrame(df_selection.groupby("year").agg({"rating_votes":"sum","imbd_votes":"sum","title":"count"})).query("title>=4")
 movies_by_year.loc[:,"avg_rating"] = round(movies_by_year["rating_votes"]/movies_by_year["imbd_votes"],1)
 movies_by_year_filtered=movies_by_year[["avg_rating","title"]].sort_values(["avg_rating","title"],ascending=[False, False])
-movies_by_year_filtered = movies_by_year_filtered.rename(columns={"title":"Number of movies","avg_rating":"Avg IMBd rating"})
+movies_by_year_filtered = movies_by_year_filtered.rename(columns={"title":"Number of movies","avg_rating":"Avg IMDb rating"})
 #Best title of each year
 considered_year = list(pd.DataFrame(df_selection.groupby("year")["title"].count()).query("title>=4").index)
 #the dataset should be sort by rating first (ascending = False)
